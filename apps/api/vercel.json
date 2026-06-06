@@ -1,6 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "pnpm install",
-  "buildCommand": "pnpm --filter @beeplay/api generate && pnpm turbo run build --filter=@beeplay/api",
-  "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
+  "installCommand": "cd ../.. && pnpm install",
+  "buildCommand": "cd ../.. && pnpm --filter @beeplay/api generate && pnpm --filter @beeplay/api build",
+  "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "node_modules/.prisma/**"
+    }
+  }
 }
