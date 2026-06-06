@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm db:generate && pnpm turbo run build --filter=@beeplay/api",
+  "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
+}
