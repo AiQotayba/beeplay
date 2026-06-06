@@ -10,7 +10,7 @@
     "generate": "node scripts/with-root-env.mjs generate",
     "push": "node scripts/with-root-env.mjs db push",
     "migrate": "node scripts/with-root-env.mjs migrate dev",
-    "seed": "tsx --env-file=../../.env prisma/seed.ts",
+    "seed": "node scripts/run-seed.mjs",
     "studio": "node scripts/with-root-env.mjs studio",
     "db:test": "tsx --env-file=../../.env scripts/test-db.ts"
   },
