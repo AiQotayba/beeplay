@@ -19,6 +19,10 @@ import settingsRoutes from "./modules/settings/settings.routes";
 
 const app = express();
 
+if (env.trustProxy !== false) {
+  app.set("trust proxy", env.trustProxy);
+}
+
 app.use(
   helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" },
