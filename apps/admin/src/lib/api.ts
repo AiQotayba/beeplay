@@ -89,3 +89,15 @@ async function request<T>(
 }
 
 export const api = request;
+
+export async function apiUpload<T>(
+  path: string,
+  formData: FormData,
+  options?: { token?: string }
+): Promise<ApiResult<T>> {
+  const response = await apiClient.request<T>("POST", path, formData, {
+    headers: options?.token ? { Authorization: `Bearer ${options.token}` } : {},
+    showErrorToast: false,
+  });
+  return toFetchResult<T>(response as unknown as Record<string, unknown>);
+}

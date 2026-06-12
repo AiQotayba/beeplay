@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
+import { ImageUpload } from "@/components/ui/image-upload";
 import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/lib/api";
 import type { AdminStadiumRecord } from "@/features/stadiums/types";
@@ -365,18 +366,14 @@ export function StadiumFormSheet({
               </div>
             </div>
 
-            <div className="space-y-1.5">
-              <Label htmlFor="coverImage">رابط صورة الغلاف</Label>
-              <Input
-                id="coverImage"
-                type="url"
-                placeholder="https://..."
-                value={form.coverImage}
-                onChange={(e) => set("coverImage", e.target.value)}
-                dir="ltr"
-                className="text-start"
-              />
-            </div>
+            <ImageUpload
+              label="صورة الغلاف"
+              value={form.coverImage}
+              onChange={(url) => set("coverImage", url)}
+              folder="stadiums"
+              token={token}
+              disabled={saving}
+            />
 
               <div className="flex flex-col gap-4 pt-1 rounded-xl bg-secondary/50 px-4 py-3">
                 <div className="flex items-center justify-between gap-4">

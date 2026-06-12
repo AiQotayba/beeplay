@@ -7,7 +7,27 @@ import { fileURLToPath } from "url";
 const apiRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const repoRoot = resolve(apiRoot, "../..");
 
-config({ path: resolve(repoRoot, ".env") });
+const envPath = resolve(repoRoot, ".env");
+
+if (!existsSync(envPath)) {
+  console.error(`Missing .env at ${envPath}`);
+  process.exit(1);
+}
+
+config({ path: envPath, override: true });
+
+const dbUrl = process.env.DATABASE_URL?.trim();
+if (!dbUrl?.startsWith("mysql://")) {
+  const preview = dbUrl
+    ? dbUrl.replace(/:[^:@]+@/, ":****@").slice(0, 60)
+    : "(empty or unset)";
+  console.error(`DATABASE_URL must start with mysql://`);
+  console.error(`File: ${envPath}`);
+  console.error(`Current value: ${preview}`);
+  console.error(`\nFix: nano ${envPath}`);
+  console.error(`Example: DATABASE_URL="mysql://USER:PASS@127.0.0.1:3306/DATABASE"`);
+  process.exit(1);
+}
 
 const args = process.argv.slice(2);
 if (args.length === 0) {

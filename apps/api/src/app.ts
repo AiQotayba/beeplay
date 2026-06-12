@@ -16,6 +16,8 @@ import analyticsRoutes from "./modules/analytics/analytics.routes";
 import availabilityRoutes from "./modules/availability/availability.routes";
 import userRoutes from "./modules/users/users.routes";
 import settingsRoutes from "./modules/settings/settings.routes";
+import uploadRoutes from "./modules/upload/upload.routes";
+import { UPLOADS_ROOT } from "./utils/uploads-path";
 
 const app = express();
 
@@ -28,7 +30,7 @@ app.use(
     crossOriginResourcePolicy: { policy: "cross-origin" },
   })
 );
-app.use("/uploads", express.static(path.resolve(__dirname, "../uploads")));
+app.use("/uploads", express.static(UPLOADS_ROOT));
 app.use(
   cors({
     origin: [env.corsOrigin, env.adminUrl, env.webUrl],
@@ -59,6 +61,7 @@ api.use("/analytics", analyticsRoutes);
 api.use("/availability", availabilityRoutes);
 api.use("/users", userRoutes);
 api.use("/settings", settingsRoutes);
+api.use("/upload", uploadRoutes);
 
 app.use(API_PREFIX, api);
 

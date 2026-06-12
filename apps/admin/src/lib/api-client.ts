@@ -113,7 +113,7 @@ class ApiCore implements ApiInstance {
   async uploadImage(
     file: File,
     folder: string,
-    options?: UploadImageOptions,
+    options?: UploadImageOptions & ApiOptions,
   ): Promise<ApiResponse<UploadResponse>> {
     try {
       this.config.onRequestStart?.();
@@ -122,7 +122,8 @@ class ApiCore implements ApiInstance {
       formData.append("image", file);
       formData.append("folder", folder);
 
-      const headers = this.prepareHeaders({});
+      const requestOptions = this.mergeOptions(options);
+      const headers = this.prepareHeaders(requestOptions);
       delete headers["Content-Type"];
 
       const xhr = new XMLHttpRequest();
@@ -175,6 +176,9 @@ class ApiCore implements ApiInstance {
 
         const fullUrl = `${this.config.baseUrl}${this.config.uploadImagePath}`;
         xhr.open("POST", fullUrl);
+        if (this.config.credentials === "include") {
+          xhr.withCredentials = true;
+        }
 
         Object.entries(headers).forEach(([key, value]) => {
           if (key !== "Content-Type") {

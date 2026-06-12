@@ -2,8 +2,7 @@ import fs from "fs";
 import path from "path";
 import { randomUUID } from "crypto";
 import multer from "multer";
-
-const UPLOADS_ROOT = path.resolve(__dirname, "../../uploads");
+import { UPLOADS_ROOT } from "../utils/uploads-path";
 const AVATARS_DIR = path.join(UPLOADS_ROOT, "avatars");
 
 fs.mkdirSync(AVATARS_DIR, { recursive: true });
@@ -30,5 +29,3 @@ export const avatarUploadMiddleware = multer({
     cb(null, true);
   },
 }).single("avatar");
-
-export { UPLOADS_ROOT };

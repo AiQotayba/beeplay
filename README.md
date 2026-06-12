@@ -46,9 +46,9 @@ pnpm dev
 
 | الدور     | البريد           | كلمة المرور  |
 | --------- | ---------------- | ------------ |
-| إدارة     | admin@beeplay.ps | ******* |
-| مالك ملعب | owner@beeplay.ps | ******* |
-| مستخدم    | user@beeplay.ps  | ******* |
+| إدارة     | admin@beeplay.sy | Password123! |
+| مالك ملعب | owner@beeplay.sy | Password123! |
+| مستخدم    | user@beeplay.sy  | Password123! |
 
 ## الروابط
 

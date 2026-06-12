@@ -7,7 +7,7 @@ import { getPagination, buildMeta, buildTableOrderBy, omitPassword } from "@beep
 import { userListQuerySchema } from "@beeplay/validation";
 import { updateProfileSchema } from "@beeplay/validation";
 import type { AuthRequest } from "../../middlewares/auth";
-import { UPLOADS_ROOT } from "../../middlewares/avatar-upload";
+import { UPLOADS_ROOT } from "../../utils/uploads-path";
 import { param } from "../../utils/params";
 import { sendError, sendPaginated, sendSuccess } from "../../utils/response";
 
